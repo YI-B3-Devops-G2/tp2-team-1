@@ -7,7 +7,7 @@ services:
       context: ./Nginx
       dockerfile: Dockerfile
     depends_on:
-      - nodeapi
+      - nodejs
     container_name: reverseproxy
     hostname: reverseproxy
     networks:
