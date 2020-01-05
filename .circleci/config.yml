@@ -7,7 +7,7 @@ executors:
       - image: circleci/buildpack-deps:stretch
 
 jobs:
-  build-images:
+  build:
     executor: mypublisher
     steps:
       - checkout
@@ -39,10 +39,10 @@ jobs:
           command: docker load -i /tmp/workspace/${PROJECT_NAME}_nginx.tar
       - run:
           name: Rename nginx Docker image
-          command: docker tag docker_nginx ced23/${PROJECT_NAME}_nginx:latest
+          command: docker tag project_nginx ced23/${PROJECT_NAME}_nginx:latest
       - run:
           name: Rename nodejs Docker image
-          command: docker tag docker_nodejs ced23/${PROJECT_NAME}_node:latest
+          command: docker tag project_nodejs ced23/${PROJECT_NAME}_node:latest
       - run:
           name: Publish Nginx Image to Docker Hub
           command: |
@@ -58,13 +58,13 @@ workflows:
   version: 2
   build-master:
     jobs:
-      - build-images:
+      - build:
           filters:
             branches:
               only: master
       - publish-latest:
           requires:
-            - build-images
+            - build
           filters:
             branches:
               only: master
