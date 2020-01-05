@@ -15,10 +15,10 @@ jobs:
       - setup_remote_docker # Ask circleci new Docker Engine to run outside of container
       - run:
           name: Up docker architecture (docker-compose)
-          command: docker-compose -f ./docker-compose.dev.yml up --build --force-recreate --detach
+          command: docker-compose -f ./docker-compose.dev.yaml up --build --force-recreate --detach
       - run:
           name: Down docker architecture (docker-compose)
-          command: docker-compose -f ./docker-compose.dev.yml down
+          command: docker-compose -f ./docker-compose.dev.yaml down
   build-images:
     executor: mypublisher
     steps:
