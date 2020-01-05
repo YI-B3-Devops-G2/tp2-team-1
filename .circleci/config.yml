@@ -8,9 +8,6 @@ executors:
 
 jobs:
   build-images:
-    docker:
-      # specify the version you desire here
-      - image: circleci/node:lts-alpine
     executor: mypublisher
     steps:
       - checkout
