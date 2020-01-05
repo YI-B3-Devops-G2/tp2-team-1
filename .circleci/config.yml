@@ -10,7 +10,7 @@ jobs:
   build-images:
     docker:
       # specify the version you desire here
-      - image: circleci/node:12.13.0
+      - image: circleci/node:lts-alpine
     executor: mypublisher
     steps:
       - checkout
