@@ -14,7 +14,7 @@ services:
       - network-nodejs
     volumes:
       - ./Nginx/conf.d/:/etc/nginx/conf.d
-    restart: on-failure
+    restart: unless-stopped
     ports:
       - 3000:80 # HOST:CLIENT
 
@@ -38,7 +38,7 @@ services:
       - REDIS_HOST=redis  # Container name
     volumes:
       - ./:/home/node/app
-    restart: on-failure   # Restarts container when it fails
+    restart: unless-stopped
     networks:
       - network-db
       - network-nodejs
@@ -54,7 +54,7 @@ services:
       POSTGRES_PASSWORD: admin
       POSTGRES_DB: database
       PGDATA: /tmp
-    restart: on-failure
+    restart: unless-stopped
     volumes:
       - ./postgres-persistant-data:/data/postgres
     networks:
@@ -63,7 +63,7 @@ services:
   redis:
     image: redis:alpine3.11
     container_name: redis
-    restart: on-failure
+    restart: unless-stopped
     networks:
       - network-db
 
