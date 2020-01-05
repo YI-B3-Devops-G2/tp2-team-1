@@ -18,7 +18,7 @@ services:
     ports:
       - 3000:80 # HOST:CLIENT
 
-  nodeapi:
+  nodejs:
     build:
       context: ./
       dockerfile: Node/Dockerfile

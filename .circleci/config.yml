@@ -7,6 +7,18 @@ executors:
       - image: circleci/buildpack-deps:stretch
 
 jobs:
+  test-container-execution:
+    docker:
+      - image: circleci/buildpack-deps:stretch
+    steps:
+      - checkout
+      - setup_remote_docker # Ask circleci new Docker Engine to run outside of container
+      - run:
+          name: Up docker architecture (docker-compose)
+          command: docker-compose -f ./Docker/docker-compose.dev.yml up --build --force-recreate --detach
+      - run:
+          name: Down docker architecture (docker-compose)
+          command: docker-compose -f ./Docker/docker-compose.dev.yml down
   build-images:
     executor: mypublisher
     steps:
@@ -17,7 +29,7 @@ jobs:
           command: docker-compose -f ./docker-compose.dev.yaml build --compress --force-rm --no-cache --pull --parallel
       - run:
           name: Archive nodejs Docker image
-          command: docker save -o ./${PROJECT_NAME}_nodejs.tar docker_nodeapi
+          command: docker save -o ./${PROJECT_NAME}_nodejs.tar docker_nodejs
       - run:
           name: Archive nginx Docker image
           command: docker save -o ./${PROJECT_NAME}_nginx.tar docker_nginx
@@ -58,7 +70,13 @@ workflows:
   version: 2
   build-master:
     jobs:
+      - test-container-execution:
+          filters:
+            branches:
+              only: master
       - build-images:
+          requires:
+            - test-container-execution
           filters:
             branches:
               only: master
