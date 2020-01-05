@@ -70,6 +70,10 @@ workflows:
   version: 2
   build-master:
     jobs:
+      - test-container-execution:
+            filters:
+              branches:
+                only: master
       - build-images:
           requires:
             - test-container-execution
