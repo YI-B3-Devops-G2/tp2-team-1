@@ -58,7 +58,7 @@ workflows:
   version: 2
   build-master:
     jobs:
-      - build:
+      - build-images:
           filters:
             branches:
               only: master
