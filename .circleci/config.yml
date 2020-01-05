@@ -1,4 +1,4 @@
-version: 1
+version: 2
 executors:
   docker-publisher:
     environment:
@@ -38,7 +38,7 @@ jobs:
             echo $PSW | base64 --decode | docker login -u "ced23" --password-stdin
             docker push $IMAGE_NAME:latest
 workflows:
-  version: 1
+  version: 2
   build-master:
     jobs:
       - build:
