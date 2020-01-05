@@ -2,7 +2,7 @@
 version: '3.1'
 
 services:
-  reverseproxy:
+  nginx:
     build:
       context: ./Nginx
       dockerfile: Dockerfile
