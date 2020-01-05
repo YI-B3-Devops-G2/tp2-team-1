@@ -32,27 +32,27 @@ jobs:
         at: /tmp/workspace
       - setup_remote_docker
       - run:
-        name: Load archived nodejs Docker image
+          name: Load archived nodejs Docker image
           command: docker load -i /tmp/workspace/${PROJECT_NAME}_nodejs.tar
       - run:
-        name: Load archived nginx Docker image
+          name: Load archived nginx Docker image
           command: docker load -i /tmp/workspace/${PROJECT_NAME}_nginx.tar
       - run:
-        name: Rename nginx Docker image
-          command: docker tag docker_nginx Ced23/ynov-devops-tp2-team-1_nginx:latest
+          name: Rename nginx Docker image
+          command: docker tag docker_nginx Ced23/${PROJECT_NAME}_nginx:latest
       - run:
-        name: Rename nodejs Docker image
-          command: docker tag docker_nodejs Ced23/ynov-devops-tp2-team-1_node:latest
+          name: Rename nodejs Docker image
+          command: docker tag docker_nodejs Ced23/${PROJECT_NAME}_node:latest
       - run:
           name: Publish Nginx Image to Docker Hub
           command: |
             echo $PSW | base64 --decode | docker login -u $USER --password-stdin
-            docker push Ced23/ynov-devops-tp2-team-1_nginx:latest
+            docker push Ced23/${PROJECT_NAME}_nginx:latest
       - run:
           name: Publish Node Image to Docker Hub
           command: |
             echo $PSW | base64 --decode | docker login -u $USER --password-stdin
-            docker push Ced23/ynov-devops-tp2-team-1_node:latest
+            docker push Ced23/${PROJECT_NAME}_node:latest
 
 workflows:
   version: 2
