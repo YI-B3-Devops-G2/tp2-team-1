@@ -14,7 +14,7 @@ jobs:
       - setup_remote_docker # Ask circleci new Docker Engine to build outside of container
       - run:
           name: Build Docker images (docker-compose)
-          command: docker-compose -f ./docker-compose.dev.yaml up --build --force-recreate # docker-compose -f ./docker-compose.dev.yml build --compress --force-rm --no-cache --pull --parallel
+          command: docker-compose -f ./docker-compose.dev.yml build --compress --force-rm --no-cache --pull --parallel
       - run:
           name: Archive nodejs Docker image
           command: docker save -o ./${PROJECT_NAME}_nodejs.tar docker_nodejs
