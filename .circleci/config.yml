@@ -7,18 +7,6 @@ executors:
       - image: circleci/buildpack-deps:stretch
 
 jobs:
-  test-container-execution:
-    docker:
-      - image: circleci/buildpack-deps:stretch
-    steps:
-      - checkout
-      - setup_remote_docker # Ask circleci new Docker Engine to run outside of container
-      - run:
-          name: Up docker architecture (docker-compose)
-          command: docker-compose -f ./docker-compose.dev.yml up --build --force-recreate --detach
-      - run:
-          name: Down docker architecture (docker-compose)
-          command: docker-compose -f ./docker-compose.dev.yml down
   build-images:
     executor: docker-publisher
     steps:
@@ -41,7 +29,7 @@ jobs:
     executor: docker-publisher
     steps:
       - attach_workspace:
-        at: /tmp/workspace
+          at: /tmp/workspace
       - setup_remote_docker
       - run:
           name: Load archived nodejs Docker image
@@ -70,13 +58,7 @@ workflows:
   version: 2
   build-master:
     jobs:
-      - test-container-execution:
-            filters:
-              branches:
-                only: master
       - build-images:
-          requires:
-            - test-container-execution
           filters:
             branches:
               only: master
