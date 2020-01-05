@@ -62,7 +62,6 @@ workflows:
   build-master:
     jobs:
       - build-images:
-          requires:
           filters:
             branches:
               only: master
