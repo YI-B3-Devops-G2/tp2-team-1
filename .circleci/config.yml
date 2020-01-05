@@ -28,6 +28,9 @@ jobs:
           name: Build Docker images (docker-compose)
           command: docker-compose -f ./docker-compose.dev.yaml build --compress --force-rm --no-cache --pull --parallel
       - run:
+          name: View working directory tree
+          command: ls -lahR
+      - run:
           name: Archive nodejs Docker image
           command: docker save -o ./${PROJECT_NAME}_nodejs.tar docker_nodejs
       - run:
