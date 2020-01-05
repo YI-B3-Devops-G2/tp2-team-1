@@ -12,4 +12,4 @@ COPY . .
 
 # Commands at runtime
 # Command "dev" does not work
-CMD [ "npm", "run", "start" ]
+CMD [ "ls", "npm", "run", "start" ]
