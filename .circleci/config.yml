@@ -7,18 +7,6 @@ executors:
       - image: circleci/buildpack-deps:stretch
 
 jobs:
-  test-container-execution:
-    docker:
-      - image: circleci/buildpack-deps:stretch
-    steps:
-      - checkout
-      - setup_remote_docker # Ask circleci new Docker Engine to run outside of container
-      - run:
-          name: Up docker architecture (docker-compose)
-          command: docker-compose -f ./docker-compose.dev.yaml up --build --force-recreate --detach
-      - run:
-          name: Down docker architecture (docker-compose)
-          command: docker-compose -f ./docker-compose.dev.yaml down
   build-images:
     executor: mypublisher
     steps:
@@ -73,13 +61,8 @@ workflows:
   version: 2
   build-master:
     jobs:
-      - test-container-execution:
-          filters:
-            branches:
-              only: master
       - build-images:
           requires:
-            - test-container-execution
           filters:
             branches:
               only: master
