@@ -2,7 +2,7 @@ version: 2.1
 executors:
   mypublisher:
     environment:
-      PROJECT_NAME: devops-tp2-team-1
+      PROJECT_NAME: devops-team-1
     docker:
       - image: circleci/buildpack-deps:stretch
 
@@ -18,9 +18,6 @@ jobs:
       - run:
           name: Archive nodejs Docker image
           command: docker save -o ./${PROJECT_NAME}_nodejs.tar project_nodejs
-      - run:
-          name: Archive nginx Docker image
-          command: docker save -o ./${PROJECT_NAME}_nginx.tar project_nginx
       - persist_to_workspace:
           root: .
           paths:
@@ -32,22 +29,11 @@ jobs:
           at: /tmp/workspace
       - setup_remote_docker
       - run:
-          name: Load archived nodejs Docker image
+          name: Load archived nodejs image
           command: docker load -i /tmp/workspace/${PROJECT_NAME}_nodejs.tar
       - run:
-          name: Load archived nginx Docker image
-          command: docker load -i /tmp/workspace/${PROJECT_NAME}_nginx.tar
-      - run:
-          name: Rename nginx Docker image
-          command: docker tag project_nginx ced23/${PROJECT_NAME}_nginx:latest
-      - run:
-          name: Rename nodejs Docker image
+          name: Rename nodejs image
           command: docker tag project_nodejs ced23/${PROJECT_NAME}_node:latest
-      - run:
-          name: Publish Nginx Image to Docker Hub
-          command: |
-            echo $PSW | base64 --decode | docker login -u $USER --password-stdin
-            docker push ced23/${PROJECT_NAME}_nginx:latest
       - run:
           name: Publish Node Image to Docker Hub
           command: |
