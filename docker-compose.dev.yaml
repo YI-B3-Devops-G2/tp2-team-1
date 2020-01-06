@@ -46,11 +46,10 @@ services:
       - network-db
 
   redis:
-    image: redis:alpine3.11
+    image: redis:latest
     container_name: redis
     restart: unless-stopped
-    networks:
-      - network-db
+    command: ["redis-server", "--bind", "redis", "--port", "6379"]
 
 networks:
   network-db:
