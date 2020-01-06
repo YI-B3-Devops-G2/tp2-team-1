@@ -2,12 +2,26 @@
 version: '3.1'
 
 services:
+  nginx:
+    build:
+      context: ./Nginx
+      dockerfile: Dockerfile
+    depends_on:
+      - nodejs
+    container_name: reverseproxy
+    hostname: reverseproxy
+    networks:
+      - network-nodejs
+    volumes:
+      - ./Nginx/conf.d/:/etc/nginx/conf.d
+    restart: unless-stopped
+    ports:
+      - 3000:80 # HOST:CLIENT
+
   nodejs:
     build:
       context: ./
       dockerfile: Node/Dockerfile
-    ports:
-      - "4040:4040"
     depends_on:
       - postgres
       - redis
@@ -27,6 +41,7 @@ services:
     restart: unless-stopped
     networks:
       - network-db
+      - network-nodejs
 
   postgres:
     image: postgres:alpine
@@ -46,10 +61,12 @@ services:
       - network-db
 
   redis:
-    image: redis:latest
+    image: redis:alpine3.11
     container_name: redis
     restart: unless-stopped
-    command: ["redis-server", "--bind", "redis", "--port", "6379"]
+    networks:
+      - network-db
 
 networks:
   network-db:
+  network-nodejs:
