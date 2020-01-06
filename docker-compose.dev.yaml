@@ -6,6 +6,8 @@ services:
     build:
       context: ./
       dockerfile: Node/Dockerfile
+    ports:
+      - "4040:4040"
     depends_on:
       - postgres
       - redis
@@ -25,7 +27,6 @@ services:
     restart: unless-stopped
     networks:
       - network-db
-      - network-nodejs
 
   postgres:
     image: postgres:alpine
@@ -53,4 +54,3 @@ services:
 
 networks:
   network-db:
-  network-nodejs:
