@@ -22,7 +22,7 @@ jobs:
           root: .
           paths:
             - ./*.tar
-  publish-latest:
+  upload-latest:
     executor: mypublisher
     steps:
       - attach_workspace:

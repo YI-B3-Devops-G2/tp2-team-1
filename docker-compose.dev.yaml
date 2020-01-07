@@ -2,22 +2,6 @@
 version: '3.1'
 
 services:
-  nginx:
-    build:
-      context: ./Nginx
-      dockerfile: Dockerfile
-    depends_on:
-      - nodejs
-    container_name: reverseproxy
-    hostname: reverseproxy
-    networks:
-      - network-nodejs
-    volumes:
-      - ./Nginx/conf.d/:/etc/nginx/conf.d
-    restart: unless-stopped
-    ports:
-      - 3000:80 # HOST:CLIENT
-
   nodejs:
     build:
       context: ./
