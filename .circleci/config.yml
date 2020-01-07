@@ -48,7 +48,7 @@ workflows:
           filters:
             branches:
               only: master
-      - publish-latest:
+      - upload-latest:
           requires:
             - build
           filters:
