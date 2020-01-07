@@ -20,14 +20,14 @@ Pour faire cela on utilise un projet qui contient une API avec une route de base
 
 ## Installation
 
-Pour installer le projet il suffit de lancer la commande suivante via powershell
+Pour installer le projet il suffit de lancer la commande suivante via powershell <br>
 `docker pull ced23/devops-team-1_node`
 
-Pour le lancer il faut utiliser la commande 
+Pour le lancer il faut utiliser la commande <br>
 `docker run ced23/devops-team-1_node`
 
 ## Routes
 
-`localhost:3000/api` &rarr; Page de base de l'API
+`localhost:4040/` &rarr; Page de base de l'API
 
-`localhost:3000/api/status` &rarr; Page spécifique de l'API
+`localhost:4040//status` &rarr; Page spécifique de l'API

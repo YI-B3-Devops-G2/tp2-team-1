@@ -16,7 +16,10 @@ jobs:
           name: Build Docker images (docker-compose)
           command: docker-compose -f ./docker-compose.dev.yaml build --compress --force-rm --no-cache --pull --parallel
       - run:
-          name: Archive nodejs Docker image
+          name: View docker images
+          command: docker images -a
+      - run:
+          name: Save nodejs Docker image
           command: docker save -o ./${PROJECT_NAME}_nodejs.tar project_nodejs
       - persist_to_workspace:
           root: .
@@ -29,8 +32,11 @@ jobs:
           at: /tmp/workspace
       - setup_remote_docker
       - run:
-          name: Load archived nodejs image
+          name: Load saved nodejs image
           command: docker load -i /tmp/workspace/${PROJECT_NAME}_nodejs.tar
+      - run:
+          name: View docker images
+          command: docker images -a
       - run:
           name: Rename nodejs image
           command: docker tag project_nodejs ced23/${PROJECT_NAME}_node:latest
