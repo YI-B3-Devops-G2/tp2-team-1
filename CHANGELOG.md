@@ -6,7 +6,7 @@ et ce projet *essaye* d'adhérer à [Semantic Versioning](https://semver.org/spe
 
 ## [0.3.0] - 07/01/2020
 ### Changé
-- Ajout de tests dans l'API pour vérifier les connections à PostgreSQL et Redis
+- Ajout de tests dans l'API pour vérifier les connexions à PostgreSQL et Redis
 
 
 ## [0.2.0] - 06/01/2020
