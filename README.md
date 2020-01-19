@@ -13,6 +13,9 @@
 Le but du TP est d'avoir une image Docker qui se met à jour automatiquement sur Docker Hub dès lors qu'un push est fait sur ce repo Git. <br>
 L'image contient une API avec une route de base et une route avec un retour spécifique.
 
+## DockerHub
+link: https://hub.docker.com/r/ced23/devops-team-1_node
+
 ## Prérequis
 
 - Docker & Docker Compose
