@@ -57,3 +57,8 @@ Sinon, <br>
 
 `echo $PSW | base64 --decode | docker login -u $USER --password-stdin
             docker push ced23/${PROJECT_NAME}_node:latest` &rarr; Publication de l'image sur Dockerhub
+           
+## Difficultés recontrées
+
+Nous avons voulut utiliser simplement docker build puisque nous n'avons qu'une seule image à build, mais nous avons rencontré des problèmes lors de son utilisation et avons finalement continué à utiliser docker-compose build
+
