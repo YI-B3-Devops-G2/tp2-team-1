@@ -43,13 +43,13 @@ Sinon, <br>
 
 ## Fonctionnement de circleCI
 
-###Job build 
+### Job build 
 
 `docker-compose -f ./docker-compose.dev.yaml build --compress --force-rm --no-cache --pull --parallel` &rarr; Build de l'image
 
 `docker save -o ./${PROJECT_NAME}_nodejs.tar project_nodejs` &rarr; Archivage de l'image
 
-###Job upload
+### Job upload
 
 `docker load -i /tmp/workspace/${PROJECT_NAME}_nodejs.tar` &rarr; Chargement de l'image docker
 
